@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexander V. Smal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --accent: #3182ce;
+            --accent-dark: #2c5282;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7fafc;
+            --border: #e2e8f0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-secondary);
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--bg-primary);
+            padding: 60px 0 40px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 60px;
+            background-color: var(--bg-secondary);
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--text-muted);
+            border: 3px solid var(--border);
+        }
+        
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.025em;
+        }
+        
+        .tagline {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .affiliation {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+        
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .contact-links a:hover {
+            color: var(--accent-dark);
+        }
+        
+        #email-link {
+            cursor: pointer;
+        }
+        
+        /* Main Content */
+        main {
+            padding: 48px 0;
+        }
+        
+        .section {
+            background-color: var(--bg-primary);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+            letter-spacing: -0.025em;
+        }
+        
+        h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin: 32px 0 16px;
+            color: var(--text-primary);
+        }
+        
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.75;
+        }
+        
+        /* Publications */
+        .publication {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .publication:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .pub-title {
+            font-weight: 600;
+            font-size: 1.0625rem;
+            margin-bottom: 8px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+        
+        .pub-authors {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        
+        .pub-authors .me {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .pub-venue {
+            font-size: 0.9375rem;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+        
+        .pub-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .pub-links a {
+            font-size: 0.875rem;
+            color: var(--accent);
+            text-decoration: none;
+            padding: 6px 12px;
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        
+        .pub-links a:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        /* Timeline Items */
+        .timeline-item {
+            margin-bottom: 24px;
+            position: relative;
+            padding-left: 24px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent);
+        }
+
+        .timeline-item a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .timeline-item a:hover {
+            color: var(--accent-dark);
+        }
+        
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .timeline-title {
+            font-weight: 600;
+            font-size: 1.0625rem;
+            color: var(--text-primary);
+        }
+        
+        .timeline-date {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        
+        .timeline-org {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        
+        .timeline-desc {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* Skills */
+        .skills-container {
+            margin-top: 16px;
+        }
+        
+        .skill-group {
+            margin-bottom: 16px;
+        }
+        
+        .skill-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 0.9375rem;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .skill-tag {
+            font-size: 0.875rem;
+            padding: 4px 12px;
+            background-color: var(--bg-secondary);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+        
+        /* List Items */
+        ul {
+            margin-left: 20px;
+            color: var(--text-secondary);
+        }
+        
+        li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 48px 20px 32px;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 640px) {
+            header {
+                padding: 40px 0 32px;
+            }
+            
+            h1 {
+                font-size: 1.75rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .section {
+                padding: 24px;
+                border-radius: 8px;
+            }
+            
+            h2 {
+                font-size: 1.25rem;
+                margin-bottom: 20px;
+            }
+            
+            .timeline-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .contact-links {
+                gap: 16px;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: white;
+            }
+            
+            .section {
+                box-shadow: none;
+                border: 1px solid var(--border);
+                margin-bottom: 16px;
+            }
+            
+            .pub-links a {
+                border: none;
+                padding: 0;
+                margin-right: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="profile-image">
+                <img src="userpic.jpg" alt="Alexander V. Smal" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+            </div>
+            <h1>Alexander V. Smal</h1>
+            <p class="affiliation">Researcher at JetBrains</p>
+            <nav class="contact-links">
+                <a href="#" id="email-link" onclick="revealEmail(event)">Email</a>
+                <a href="https://scholar.google.com/citations?user=uTt5h5EAAAAJ">Google Scholar</a>
+                <a href="https://dblp.org/pid/74/8864.html">DBLP</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="section">
+            <h2>Research Interests</h2>
+            <div class="skills-container">
+                <div class="skill-group">
+                    <div class="skill-tags">
+                        <span class="skill-tag">Complexity Theory</span>
+                        <span class="skill-tag">Algorithms</span>
+                        <span class="skill-tag">Information Theory</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Research Experience</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div class="timeline-title">Researcher</div>
+                    <div class="timeline-date">2024 – Present</div>
+                </div>
+                <div class="timeline-org"><a href="https://jetbrains.com">JetBrains</a>, Limassol, Cyprus</div>
+                <div class="timeline-desc">
+                    Member of <a href="https://lp.jetbrains.com/research/algorithms-and-complexity-theory/">Algorithms and Complexity Theory Lab</a>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div class="timeline-title">Postdoctoral Fellow</div>
+                    <div class="timeline-date">2022 – 2024</div>
+                </div>
+                <div class="timeline-org">Technion – Israel Institute of Technology, Haifa, Israel</div>
+                <div class="timeline-desc">
+                    Postdoctoral research under the mentorship of <a href="https://yuvalfilmus.cs.technion.ac.il/">Yuval Filmus</a> and <a href="https://schwartz.cswp.cs.technion.ac.il/">Roy Schwartz</a>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div class="timeline-title">PhD Student, Researcher</div>
+                    <div class="timeline-date">2008 – Present (on leave)</div>
+                </div>
+                <div class="timeline-org"><a href="https://pdmi.ras.ru/pdmi/en/">Steklov Institute of Mathematics at St.Petersburg</a>, St. Petersburg, Russia</div>
+                <div class="timeline-desc">
+                    Member of <a href="https://logic.pdmi.ras.ru/">Laboratory of Mathemtical Logic</a>. <br />
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div class="timeline-title">Early Stage Researcher</div>
+                    <div class="timeline-date">2011</div>
+                </div>
+                <div class="timeline-org">Charles University, Prague, Czech Republic</div>
+                <div class="timeline-desc">
+                   Special Semester in Logic and Complexity
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div class="timeline-title">Research Intern</div>
+                    <div class="timeline-date">2011</div>
+                </div>
+                <div class="timeline-org">Microsoft Research Silicon Valley, Mountain View, CA, USA</div>
+                <div class="timeline-desc">
+                  Research intern under the mentorship of <a href="https://ai.meta.com/people/761866869341502/ilya-mironov/">Ilya Mironov</a>.
+                </div>
+            </div>
+
+        </section>
+
+        <section class="section">
+            <h2>Teaching Experience</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div class="timeline-org">Neapolis University Pafos</div>
+                    <div class="timeline-date">2024 – Present</div>
+                </div>
+                <div class="timeline-desc">
+                  BSc program <a href="https://lp.jetbrains.com/academy/csai-program/">Computer Science and Artificial Intelligence</a><br />
+                  Courses: Information Theory, Mathematical Logic, Mathematical Analysis
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div class="timeline-org">ITMO University, St. Petersburg, Russia</a></div>
+                    <div class="timeline-date">2018 – 2022</div>
+                </div>
+                <div class="timeline-desc">
+                  Courses: Algorithms, Information Theory 
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div class="timeline-org">St. Petersburg University, Russia</a></div>
+                    <div class="timeline-date">2020</div>
+                </div>
+                <div class="timeline-desc">
+                  Courses: Advanced Algorithms
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div class="timeline-org">Higher School of Economics, St. Petersburg, Russia</a></div>
+                    <div class="timeline-date">2020</div>
+                </div>
+                <div class="timeline-desc">
+                  Courses: Information Theory
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div class="timeline-org">St. Petersburg Academic University, Russia</a></div>
+                    <div class="timeline-date">2008 – 2018</div>
+                </div>
+                <div class="timeline-desc">
+                  Courses: Algorithms, C++, Information Theory, Foundations of Cryptography
+                </div>
+            </div>
+
+        </section>
+
+        <section class="section">
+            <h2>Publications</h2>
+            
+            <h3>Conference Papers</h3>
+            
+            <div class="publication">
+                <div class="pub-title">Separating Coverage and Submodular: Maximization Subject to a Cardinality Constraint</div>
+                <div class="pub-authors">Yuval Filmus, Roy Schwartz, <span class="me">Alexander V. Smal</span></div>
+                <div class="pub-venue">Integer Programming and Combinatorial Optimization (IPCO), 2025</div>
+                <div class="pub-links">
+                    <a href="https://doi.org/10.1007/978-3-031-93112-3_18">Paper</a>
+                    <a href="https://doi.org/10.48550/arXiv.2411.05553">arXiv</a>
+                </div>
+            </div>
+            
+            <div class="publication">
+                <div class="pub-title">Lifting Dichotomies</div>
+                <div class="pub-authors">Yaroslav Alekseev, Yuval Filmus, <span class="me">Alexander Smal</span></div>
+                <div class="pub-venue">Computational Complexity Conference (CCC), 2024</div>
+                <div class="pub-links">
+                    <a href="https://doi.org/10.4230/LIPIcs.CCC.2024.9">Paper</a>
+                    <a href="https://eccc.weizmann.ac.il/report/2024/037">ECCC</a>
+                </div>
+            </div>
+            
+            <div class="publication">
+                <div class="pub-title">Proving Unsatisfiability with Hitting Formulas</div>
+                <div class="pub-authors">Yuval Filmus, Edward A. Hirsch, Artur Riazanov, <span class="me">Alexander Smal</span>, Marc Vinyals</div>
+                <div class="pub-venue">Innovations in Theoretical Computer Science (ITCS), 2024</div>
+                <div class="pub-links">
+                    <a href="https://doi.org/10.4230/LIPIcs.ITCS.2024.48">Paper</a>
+                    <a href="https://doi.org/10.48550/arXiv.2302.06241">arXiv</a>
+                    <a href="https://eccc.weizmann.ac.il/report/2023/016">ECCC</a>
+                </div>
+            </div>
+            
+            <div class="publication">
+                <div class="pub-title">Super-Cubic Lower Bound for Generalized Karchmer-Wigderson Games</div>
+                <div class="pub-authors">Artur Ignatiev, Ivan Mihajlin, <span class="me">Alexander Smal</span></div>
+                <div class="pub-venue">International Symposium on Algorithms and Computation (ISAAC), 2022</div>
+                <div class="pub-links">
+                    <a href="https://doi.org/10.4230/LIPIcs.ISAAC.2022.66">Paper</a>
+                    <a href="https://eccc.weizmann.ac.il/report/2022/016">ECCC</a>
+                </div>
+            </div>
+            
+            <div class="publication">
+                <div class="pub-title">Toward Better Depth Lower Bounds: The XOR-KRW Conjecture</div>
+                <div class="pub-authors">Ivan Mihajlin, <span class="me">Alexander Smal</span></div>
+                <div class="pub-venue">Computational Complexity Conference (CCC), 2021</div>
+                <div class="pub-links">
+                    <a href="https://doi.org/10.4230/LIPIcs.CCC.2021.38">Paper</a>
+                    <a href="https://eccc.weizmann.ac.il/report/2020/116">ECCC</a>
+                </div>
+            </div>
+            
+            <div class="publication">
+                <div class="pub-title">New Bounds on the Half-Duplex Communication Complexity</div>
+                <div class="pub-authors">Yuriy Dementiev, Artur Ignatiev, Vyacheslav Sidelnik, <span class="me">Alexander Smal</span>, Mikhail Ushakov</div>
+                <div class="pub-venue">SOFSEM: Theory and Practice of Computer Science, 2021</div>
+                <div class="pub-links">
+                    <a href="https://doi.org/10.1007/978-3-030-67731-2_17">Paper</a>
+                    <a href="https://eccc.weizmann.ac.il/report/2020/117">ECCC</a>
+                </div>
+            </div>
+            
+            <div class="publication">
+                <div class="pub-title">Half-Duplex Communication Complexity</div>
+                <div class="pub-authors">Kenneth Hoover, Russell Impagliazzo, Ivan Mihajlin, <span class="me">Alexander V. Smal</span></div>
+                <div class="pub-venue">International Symposium on Algorithms and Computation (ISAAC), 2018</div>
+                <div class="pub-links">
+                    <a href="https://doi.org/10.4230/LIPIcs.ISAAC.2018.10">Paper</a>
+                    <a href="https://eccc.weizmann.ac.il/report/2018/089">ECCC</a>
+                </div>
+            </div>
+            
+            <div class="publication">
+                <div class="pub-title">Circuit Size Lower Bounds and #SAT Upper Bounds Through a General Framework</div>
+                <div class="pub-authors">Alexander Golovnev, Alexander S. Kulikov, <span class="me">Alexander V. Smal</span>, Suguru Tamaki</div>
+                <div class="pub-venue">Mathematical Foundations of Computer Science (MFCS), 2016</div>
+                <div class="pub-links">
+                    <a href="https://doi.org/10.4230/LIPIcs.MFCS.2016.45">Paper</a>
+                    <a href="https://eccc.weizmann.ac.il/report/2016/022">ECCC</a>
+                </div>
+            </div>
+            
+            <h3>Journal Articles</h3>
+            
+            <div class="publication">
+                <div class="pub-title">Irreducible Subcube Partitions</div>
+                <div class="pub-authors">Yuval Filmus, Edward A. Hirsch, Sascha Kurz, Ferdinand Ihringer, Artur Ryazanov, <span class="me">Alexander V. Smal</span>, Marc Vinyals</div>
+                <div class="pub-venue">Electronic Journal of Combinatorics, vol. 30, no. 3, 2023</div>
+                <div class="pub-links">
+                    <a href="https://doi.org/10.37236/11862">Paper</a>
+                    <a href="https://doi.org/10.48550/arXiv.2212.14685">arXiv</a>
+                </div>
+            </div>
+            
+            <div class="publication">
+                <div class="pub-title">Prediction from Partial Information and Hindsight, an Alternative Proof</div>
+                <div class="pub-authors"><span class="me">Alexander V. Smal</span>, Navid Talebanfard</div>
+                <div class="pub-venue">Information Processing Letters, vol. 136, pp. 102-104, 2018</div>
+                <div class="pub-links">
+                    <a href="https://doi.org/10.1016/j.ipl.2018.04.011">Paper</a>
+                    <a href="https://eccc.weizmann.ac.il/report/2017/191">ECCC</a>
+                </div>
+            </div>
+            
+            <div class="publication">
+                <div class="pub-title">Gate Elimination: Circuit Size Lower Bounds and #SAT Upper Bounds</div>
+                <div class="pub-authors">Alexander Golovnev, Alexander S. Kulikov, <span class="me">Alexander V. Smal</span>, Suguru Tamaki</div>
+                <div class="pub-venue">Theoretical Computer Science, vol. 719, pp. 46-63, 2018</div>
+                <div class="pub-links">
+                    <a href="https://doi.org/10.1016/j.tcs.2017.11.008">Paper</a>
+                </div>
+            </div>
+            
+            <div class="publication">
+                <div class="pub-title">On Optimal Heuristic Randomized Semidecision Procedures, with Applications to Proof Complexity and Cryptography</div>
+                <div class="pub-authors">Edward A. Hirsch, Dmitry Itsykson, Ivan Monakhov, <span class="me">Alexander Smal</span></div>
+                <div class="pub-venue">Theory of Computing Systems, vol. 51, no. 2, pp. 179-195, 2012</div>
+                <div class="pub-links">
+                    <a href="https://doi.org/10.1007/s00224-011-9354-3">Paper</a>
+                    <a href="https://eccc.weizmann.ac.il/report/2010/193">ECCC</a>
+                </div>
+            </div>
+            
+            <h3>Preprints</h3>
+            
+            <div class="publication">
+                <div class="pub-title">Catalytic Computing and Register Programs Beyond Log-Depth</div>
+                <div class="pub-authors">Yaroslav Alekseev, Yuval Filmus, Ian Mertz, <span class="me">Alexander Smal</span>, Antoine Vinciguerra</div>
+                <div class="pub-venue">arXiv:2504.17412, 2025</div>
+                <div class="pub-links">
+                    <a href="https://doi.org/10.48550/arXiv.2504.17412">arXiv</a>
+                    <a href="https://eccc.weizmann.ac.il/report/2025/055">ECCC</a>
+                </div>
+            </div>
+            
+            <div class="publication">
+                <div class="pub-title">Simplifier: A New Tool for Boolean Circuit Simplification</div>
+                <div class="pub-authors">Daniil Averkov, Gregory Emdin, Viktoriia Krivogornitsyna, Alexander S. Kulikov, Fedor Kurmazov, <span class="me">Alexander Smal</span>, Vsevolod Vaskin</div>
+                <div class="pub-venue">arXiv:2503.19103, 2025</div>
+                <div class="pub-links">
+                    <a href="https://doi.org/10.48550/arXiv.2503.19103">arXiv</a>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="section">
+            <h2>Education</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div class="timeline-title">PhD in Computer Science</div>
+                    <div class="timeline-date">2008-2022</div>
+                </div>
+                <div class="timeline-org">Steklov Institute of Mathematics at St.Petersburg, St. Petersburg, Russia</div>
+                <div class="timeline-desc">
+                    Advisor: <a href="https://edwardahirsch.github.io/edwardahirsch/">Edward A. Hirsch</a><br>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div class="timeline-title">MSc in Computer Science</div>
+                    <div class="timeline-date">2006 – 2008</div>
+                </div>
+                <div class="timeline-org">ITMO University, St. Petersburg, Russia</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div class="timeline-title">BSc in Computer Science</div>
+                    <div class="timeline-date">2002 – 2006</div>
+                </div>
+                <div class="timeline-org">ITMO University, St. Petersburg, Russia</div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Alexander V. Smal. Last updated July 2025.</p>
+    </footer>
+
+    <script>
+        // Anti-spam email protection
+        function revealEmail(e) {
+            e.preventDefault();
+            // Replace these values with your actual email parts
+            var user = 'avsmal';
+            var domain = 'gmail.com';
+            var email = user + '@' + domain;
+            
+            // Update the link
+            var link = document.getElementById('email-link');
+            link.href = 'mailto:' + email;
+            link.textContent = email;
+            link.onclick = null; // Remove the onclick handler
+        }
+    </script>
+</body>
+</html>
