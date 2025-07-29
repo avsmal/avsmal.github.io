@@ -1,0 +1,1 @@
+# avsmal.github.io
